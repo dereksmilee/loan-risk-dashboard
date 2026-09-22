@@ -45,7 +45,6 @@
 | outstanding_balance | 현재 대출 잔액 | |
 | interest_rate | 금리 | |
 | credit_grade | 신용등급 | |
-| region | 대출 지역 | |
 | loan_date | 대출 실행일 | |
 | maturity_date | 만기일 | |
 | delinquency_days | 연체 일수 | |
