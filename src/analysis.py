@@ -30,9 +30,7 @@ def calculate_credit_risk(df):
 
 
 def calculate_region_risk(df, customer_df):
-    merged_df = df.merge(customer_df, on="customer_id")
-
-    region_risk = merged_df.groupby("region").agg(
+    region_risk = df.groupby("region").agg(
         total_loans=("loan_id", "count"),
         risky_loans=("loan_status", lambda x: x.isin(["연체", "부실"]).sum()),
     )
@@ -48,6 +46,7 @@ def calculate_yearly_risk(df):
     yearly_risk = df.copy()
 
     yearly_risk["loan_date"] = pd.to_datetime(yearly_risk["loan_date"])
+
     yearly_risk["loan_year"] = yearly_risk["loan_date"].dt.year
 
     yearly_risk = yearly_risk.groupby("loan_year").agg(
@@ -63,6 +62,8 @@ def calculate_yearly_risk(df):
 
 
 def find_anomalies(df):
-    anomalies = df[df["delinquency_days"] >= 90]
+    anomalies = df[df["delinquency_days"] >= 90].copy()
+
+    anomalies["anomaly_reason"] = "90일 이상 장기 연체"
 
     return anomalies
