@@ -90,8 +90,9 @@ delinquent_loans = (df["loan_status"] == "연체").sum()
 
 risky_loans = df["loan_status"].isin(["연체", "부실"]).sum()
 
+risk_rate = risky_loans / total_loans * 100
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 col1.metric("전체 대출 건수", total_loans)
 
@@ -100,6 +101,8 @@ col2.metric("총 대출 잔액", f"{total_balance:,.0f}")
 col3.metric("연체 대출 건수", delinquent_loans)
 
 col4.metric("위험 대출 건수", risky_loans)
+
+col5.metric("위험 대출 비율", f"{risk_rate:,.1f}%")
 
 
 # =========================
