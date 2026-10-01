@@ -34,7 +34,6 @@ product_df = pd.DataFrame(product_rows, columns=product_columns)
 customer_rows, customer_columns = get_customers()
 customer_df = pd.DataFrame(customer_rows, columns=customer_columns)
 
-st.write(customer_df.columns.tolist())
 
 # =========================
 # 필터
@@ -133,7 +132,7 @@ with col2:
 # 지역 / 기간 분석
 # =========================
 
-region_risk = calculate_region_risk(df, customer_df)
+region_risk = calculate_region_risk(df)
 
 yearly_risk = calculate_yearly_risk(df)
 

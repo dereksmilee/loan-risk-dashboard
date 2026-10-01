@@ -29,7 +29,7 @@ def calculate_credit_risk(df):
     return credit_risk.reset_index()
 
 
-def calculate_region_risk(df, customer_df):
+def calculate_region_risk(df):
     region_risk = df.groupby("region").agg(
         total_loans=("loan_id", "count"),
         risky_loans=("loan_status", lambda x: x.isin(["연체", "부실"]).sum()),
