@@ -118,6 +118,11 @@ product_risk = calculate_product_risk(df)
 
 credit_risk = calculate_credit_risk(df)
 
+highest_risk_product = product_risk.loc[product_risk["delinquency_rate"].idxmax()]
+
+st.metric("최고 연체율 상품", highest_risk_product["product_name"])
+st.metric("최고 연체율", f"{highest_risk_product['delinquency_rate']:.1f}%")
+
 
 col1, col2 = st.columns(2)
 
