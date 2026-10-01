@@ -46,9 +46,14 @@ selected_grade = st.selectbox("신용등급", credit_grades)
 if selected_grade != "전체":
     df = df[df["credit_grade"] == selected_grade]
 
-
+df = df.merge(product_df[["product_id", "product_name"]], on="product_id", how="left")
 df = df.merge(customer_df[["customer_id", "region"]], on="customer_id", how="left")
 
+product_names = ["전체"] + sorted(df["product_name"].unique().tolist())
+selected_product = st.selectbox("상품", product_names)
+
+if selected_product != "전체":
+    df = df[df["product_name"] == selected_product]
 
 regions = ["전체"] + sorted(df["region"].unique().tolist())
 
@@ -102,7 +107,7 @@ with st.expander("필터링된 대출 원본 데이터 보기"):
 # 상품 / 신용등급 분석
 # =========================
 
-product_risk = calculate_product_risk(df, product_df)
+product_risk = calculate_product_risk(df)
 
 credit_risk = calculate_credit_risk(df)
 

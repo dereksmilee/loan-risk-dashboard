@@ -1,10 +1,8 @@
 import pandas as pd
 
 
-def calculate_product_risk(df, product_df):
-    merged_df = df.merge(product_df, on="product_id")
-
-    product_risk = merged_df.groupby("product_name").agg(
+def calculate_product_risk(df):
+    product_risk = df.groupby("product_name").agg(
         total_loans=("loan_id", "count"),
         delinquent_loans=("loan_status", lambda x: (x == "연체").sum()),
     )
