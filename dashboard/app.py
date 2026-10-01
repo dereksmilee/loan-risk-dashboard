@@ -62,6 +62,13 @@ selected_region = st.selectbox("지역", regions)
 if selected_region != "전체":
     df = df[df["region"] == selected_region]
 
+loan_statuses = ["전체"] + sorted(df["loan_status"].unique().tolist())
+
+selected_status = st.selectbox("대출상태", loan_statuses)
+
+if selected_status != "전체":
+    df = df[df["loan_status"] == selected_status]
+
 
 start_date = st.date_input("시작일", value=pd.to_datetime(df["loan_date"]).min())
 
