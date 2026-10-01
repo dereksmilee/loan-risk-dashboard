@@ -2,7 +2,14 @@ import mysql.connector
 
 
 def get_connection():
-    return mysql.connector.connect(host="localhost", user="root", database="loan_risk")
+    try:
+        return mysql.connector.connect(
+            host="localhost", user="root", database="loan_risk"
+        )
+
+    except mysql.connector.Error as e:
+        print("MySQL 연결 실패:", e)
+        raise
 
 
 def get_loans():
@@ -48,3 +55,10 @@ def get_customers():
     conn.close()
 
     return rows, columns
+
+
+# if __name__ == "__main__":
+#     rows, columns = get_loans()
+
+#     print(columns)
+#     print(rows)
